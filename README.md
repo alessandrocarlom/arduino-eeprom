@@ -1,9 +1,13 @@
 ### Arduino EEPROM Read/Write
 
-This is an implementation for reading/writing IP related information (IP Address, Subnet, Gateway and DNS) from/to Arduino EEPROM.
-Tested on Arduino Ethernet board which has 1k of EEPROM but can be adapted to other Arduino boards.
+[Arduino Board Ethernet](arduio-board-eth.jpg)
 
-## Available serial API:
+This is an implementation for reading/writing IP related information (IP Address, Subnet, Gateway and DNS) from/to Arduino EEPROM. Tested on [Arduino Ethernet](https://store.arduino.cc/usa/arduino-ethernet-rev3-without-poe) board which has 1k of EEPROM but can be adapted to other Arduino boards.
+
+#### API Structure:
+COMMAND:PARAM:VALUE
+
+#### Available serial API:
 - WRITE:IP:192.168.1.50      
 - WRITE:SUBNET:255.255.255.0 
 - WRITE:GATEWAY:192.168.1.254
@@ -14,13 +18,13 @@ Tested on Arduino Ethernet board which has 1k of EEPROM but can be adapted to ot
 - READ:DNS
 - RESTART:NET
 
-## Assigned EEPROM Address:
-- WRITE:IP:192.168.1.50          IP      : 0-3
-- WRITE:SUBNET:255.255.255.0     SUBNET  : 4-7
-- WRITE:GATEWAY:192.168.1.254    GATEWAY : 8-11
+#### Assigned EEPROM Addresses:
+- IP      : 0-3
+- SUBNET  : 4-7
+- GATEWAY : 8-11
 - DNS     : 12-15
 
-## Example:
+#### Example:
 ```
 Serial port COM6 opened
 READ:IP
