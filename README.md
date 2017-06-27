@@ -1,6 +1,6 @@
 ### Arduino EEPROM Read/Write
 
-[Arduino Board Ethernet](arduio-board-eth.jpg)
+![Arduino Board Ethernet](arduino-board-eth.png)
 
 This is an implementation for reading/writing IP related information (IP Address, Subnet, Gateway and DNS) from/to Arduino EEPROM. Tested on [Arduino Ethernet](https://store.arduino.cc/usa/arduino-ethernet-rev3-without-poe) board which has 1k of EEPROM but can be adapted to other Arduino boards.
 
