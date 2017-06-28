@@ -116,6 +116,7 @@ void __processSerial() {
         sprintf(buff, "\nUNKNOWN COMMAND");
       }
       Serial.println(buff);
+      memset(buff, 0, sizeof buff);
       inputSerial = "";
       command = "";
       param = "";
