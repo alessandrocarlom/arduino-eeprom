@@ -1,5 +1,5 @@
 /*
-   Info     : Serial interface for storing/retrieving
+   Info     : Serial implementation for storing/retrieving
               IP address information to/from EEPROM
    Created  : 19 June 2017
    Author   : Eddy Yanto
@@ -25,9 +25,9 @@ byte mac[] = { 0x20, 0xF8, 0x5E, 0xEF, 0xFE, 0xED };
 
 char buff[32]; //buffer for sprintf
 char byteSerial; //store incoming serial one byte at a time
-String inputSerial, command, param; //command parsing variable
+String inputSerial, command, param; //command parsing variables
 
-//EEPROM address
+//EEPROM addresses
 const int ipEEPROMAddress[]       = {0, 1, 2, 3};
 const int subnetEEPROMAddress[]   = {4, 5, 6, 7};
 const int gatewayEEPROMAddress[]  = {8, 9, 10, 11};
@@ -91,35 +91,31 @@ void __processSerial() {
           } else if (param == "DNS") {
             __writeEEPROM(dnsEEPROMAddress, tempIp);
           } else {
-            Serial.println("\nUNKNOWN COMMAND");
+            sprintf(buff, "\nUNKNOWN COMMAND");
           }
         } else {
-          Serial.println("\nINVALID ADDRESS");
+          sprintf(buff, "\nINVALID ADDRESS");
         }
       } else if (command == "READ") {
         if (param == "IP") {
           sprintf(buff, "\nIP : %d.%d.%d.%d", EEPROM.read(0), EEPROM.read(1), EEPROM.read(2), EEPROM.read(3));
-          Serial.println(buff);
         } else if (param == "SUBNET") {
           sprintf(buff, "\nSUBNET : %d.%d.%d.%d", EEPROM.read(4), EEPROM.read(5), EEPROM.read(6), EEPROM.read(7));
-          Serial.println(buff);
         } else if (param == "GATEWAY") {
           sprintf(buff, "\nGATEWAY : %d.%d.%d.%d", EEPROM.read(8), EEPROM.read(9), EEPROM.read(10), EEPROM.read(11));
-          Serial.println(buff);
         } else if (param == "DNS") {
           sprintf(buff, "\nDNS : %d.%d.%d.%d", EEPROM.read(12), EEPROM.read(13), EEPROM.read(14), EEPROM.read(15));
-          Serial.println(buff);
         } else {
-          Serial.println("\nUNKNOWN COMMAND");
+          sprintf(buff, "\nUNKNOWN COMMAND");
         }
       } else if (command == "RESTART") {
-        Serial.println("\nRESTART OK");
+        sprintf(buff, "\nRESTART OK");
         delay(50);
         resetFunc();
       } else {
-        Serial.println("\nUNKNOWN COMMAND");
+        sprintf(buff, "\nUNKNOWN COMMAND");
       }
-
+      Serial.println(buff);
       inputSerial = "";
       command = "";
       param = "";
