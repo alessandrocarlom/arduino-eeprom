@@ -3,7 +3,7 @@
               IP address information to/from EEPROM
    Created  : 19 June 2017
    Author   : Eddy Yanto
-   Board    : Arduino Ethernet
+   Board    : Arduino Ethernet (1KB EEPROM)
 
    Available serial commands      EEPROM Address
    ---------------------------    --------------
@@ -34,9 +34,9 @@ const int gatewayEEPROMAddress[]  = {8, 9, 10, 11};
 const int dnsEEPROMAddress[]      = {12, 13, 14, 15};
 
 IPAddress ip(EEPROM.read(0), EEPROM.read(1), EEPROM.read(2), EEPROM.read(3));
-IPAddress mdns(EEPROM.read(12), EEPROM.read(13), EEPROM.read(14), EEPROM.read(15));
-IPAddress gateway(EEPROM.read(8), EEPROM.read(9), EEPROM.read(10), EEPROM.read(11));
 IPAddress subnet(EEPROM.read(4), EEPROM.read(5), EEPROM.read(6), EEPROM.read(7));
+IPAddress gateway(EEPROM.read(8), EEPROM.read(9), EEPROM.read(10), EEPROM.read(11));
+IPAddress mdns(EEPROM.read(12), EEPROM.read(13), EEPROM.read(14), EEPROM.read(15));
 EthernetServer tcpServer(7000);
 
 void setup() {
@@ -125,7 +125,7 @@ void __processSerial() {
 }
 
 void __writeEEPROM(int add[4], IPAddress tempIp) {
-  for (int i = 0; i <= 4; i++) {
+  for (int i = 0; i <= 3; i++) {
     EEPROM.write(add[i], tempIp[i]);
   }
   Serial.println("\nWRITE OK");
